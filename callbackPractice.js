@@ -23,7 +23,10 @@ and what you should write is the sayHi function that makes the code above work,
 // 1. Write a function called first that returns the first item of the array using a callback function
 
   // Code Here
-
+var first = function(arr, cb){
+  cb(arr[0]);
+    
+}
   
 var names = ['Tyler', 'Cahlan', 'Ryan', 'Colt', 'Tyler', 'Blaine', 'Cahlan'];
 first(names, function(firstName){
@@ -37,7 +40,9 @@ first(names, function(firstName){
 
   //Code Here
 
-
+var last = function (arr,cb) {
+  cb(arr[arr.length-1]);
+}
 
 last(names, function(lastName){
   console.log('The last name in names is ' + lastName);
@@ -50,7 +55,9 @@ last(names, function(lastName){
 
   //Code Here
 
-
+var multiply = (num1, num2, cb) => {
+  cb(num1 * num2);
+}
 
 multiply(4, 3, function(answer){
   console.log('The answer is ' + answer); //should console.log 12
@@ -64,7 +71,16 @@ multiply(4, 3, function(answer){
 
   //Code Here 
 
-
+var contains = (arr,name, cb) => {
+  for (var i=0; i<arr.length; i++) {
+    if(arr[i] == name){
+      cb( true);
+    }
+    else {
+      cb(false);
+    }
+  }
+}
 
 
 contains(names, 'Colt', function(result){
@@ -82,22 +98,65 @@ contains(names, 'Colt', function(result){
 
   //Code Here
 
-
-
-uniq(names, function(uniqArr){
-  console.log('The new names array with all the duplicate items removed is ', uniqArr);
-});
-
+  var names = ['Tyler', 'Cahlan', 'Ryan', 'Colt', 'Tyler', 'Blaine', 'Cahlan'];
+  var uniq = (names, cb) => {
+    
+    uniqueArray = names.filter(function(item, spot) {
+      return names.indexOf(item) == spot;
+  })
+  cb(uniqueArray);
+  }
+  
+  uniq(names, function(uniqArr){
+    console.log('The new names array with all the duplicate items removed is ', uniqArr);
+  });
 
 // 6. Write a function called each that takes in an array of names. For each name in the array, invoke the callback and pass in the name and the name's index as arguments.
 
     //Code Here 
 
 
+    
+// var each = (array, cb) => {
+//   for (var i = 0; i <array.length; i++) {
+//     array.forEach(cb(array[i], i));
+//   }
+// }
 
-each(names, function(item, indice){
-  console.log('The item in the ' + indice + ' position is ' + item)
-});
+// var each = (array, cb) => {
+  
+    
+//     names.forEach(function(element){
+//       cb(element, names.indexOf((names[element])))});
+  
+      
+//     }
+
+var names = ['Tyler', 'Cahlan', 'Ryan', 'Colt', 'Tyler', 'Blaine', 'Cahlan'];
+// var each = (array, cb) => {
+// names.forEach(function(x) {
+//   for (var i = 0; i<names.length; i++) {
+//     cb(names[i], names.indexOf(names[i]));
+//   }
+// })
+// } 
+var each = (array, cb) => {
+  // names.forEach(function(x) {
+  //   console.log(names[x]);
+     
+  // }
+  
+    for (var i = 0; i <array.length; i++) {
+      //array.forEach(cb(array[i], i));
+      cb(names[i], i);
+    }
+  
+    
+  }
+   
+  each(names, function(item, indice){
+    console.log('The item in the ' + indice + ' position is ' + item)
+  });
 
 
 
@@ -106,6 +165,14 @@ each(names, function(item, indice){
 
 // Code here
 
+var getUserById = (array,ident,cb) => {
+  array.filter(function(x){
+    if(x.id === ident) {
+      cb(x);
+    }
+    
+  })
+}
 
 
 var users = [
